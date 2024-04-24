@@ -6,4 +6,4 @@ from .models import Event
 def index(request):
     events = Event.objects.all()
     context = {"events": events}
-    return render(request, "events/index.html", context)
+    return render(request, "events/events.html", context)
