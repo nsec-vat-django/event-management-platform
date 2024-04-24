@@ -5,6 +5,7 @@
 1. [Site Mockup](https://projectbook.code.brettchalupa.com/web-apps/event-platform.html)
 2. [Django Basics](https://youtu.be/nGIg40xs9e4?si=sDYn5vgywH9Fb4Tr)
 3. [Django Authentication](https://youtu.be/Gx99hxXJSQc?si=yJ2ZOVbFNjiZrQB6)
+4. [Django VSCode Basics](https://code.visualstudio.com/docs/python/tutorial-django)
 
 ## Django admin-panel credentials
 
