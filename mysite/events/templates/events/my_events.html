@@ -1,0 +1,22 @@
+{% extends "events/layout.html" %}
+{% block title %}{{ event.title }}{% endblock %}
+{% block content %}
+
+<h1>Welcome, {{ username }}! </h1>
+<h3>Here are your events:</h3>
+
+{% if events %}
+  <ul>
+    {% for event in events %}
+    <li>
+        <h3>{{ event.title }}</h3>
+        <p>{{ event.description }}</p>
+        <p>{{ event.date }}</p>
+        <p>{{ event.location }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No events created.</p>
+{% endif %}
+{% endblock %}
