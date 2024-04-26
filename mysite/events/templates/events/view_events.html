@@ -2,12 +2,34 @@
 {% block title %}{{ event.title }}{% endblock %}
 {% block content %}
 
-<body>
-  <h1>{{ event.title }}</h1>
-  <p>{{ event.description }}</p>
-  <p><strong>Date:</strong> {{ event.date }}</p>
-  <p><strong>Location:</strong> {{ event.location }}</p>
-  <a class="btn btn-primary" href="{% url 'events' %}">Back to Event List</a>
-  <a class="btn btn-primary" href="{% url 'register_events' event.id %}">Register</a>
-</body>
+<h1>{{ event.title }}</h1>
+<p>{{ event.description }}</p>
+<p><strong>Date:</strong> {{ event.date }}</p>
+<p><strong>Location:</strong> {{ event.location }}</p>
+<a class="btn btn-primary" href="{% url 'events' %}">Back to Event List</a>
+<a class="btn btn-primary" href="{% url 'register_events' event.id %}">Register</a>
+
+{% if user.is_authenticated and event.user == user %}
+<h2>Registered Participants</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for participant in event.participants.all %}
+      <tr>
+        <td>{{ participant.name }}</td>
+        <td>{{ participant.email }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="2">No participants have registered for this event yet.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
 {% endblock %}
