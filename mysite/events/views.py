@@ -7,13 +7,13 @@ from django.contrib.auth.decorators import login_required
 
 def events(request):
     # events = Event.objects.all()
-    events = Event.objects.filter(date__gte=timezone.now())
+    events = Event.objects.filter(date__gte=timezone.now()).order_by("date")
     context = {"events": events}
     return render(request, "events/events.html", context)
 
 
 def past_events(request):
-    events = Event.objects.filter(date__lt=timezone.now())
+    events = Event.objects.filter(date__lt=timezone.now()).order_by("date")
     context = {"events": events}
     return render(request, "events/past_events.html", context)
 
@@ -84,7 +84,7 @@ def cancel_events(request, event_id):
 
 @login_required
 def my_events(request):
-    events = Event.objects.filter(user=request.user)
+    events = Event.objects.filter(user=request.user).order_by("date")
     username = request.user.username
     return render(
         request, "events/my_events.html", {"events": events, "username": username}
