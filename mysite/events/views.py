@@ -2,9 +2,9 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 from datetime import datetime
 from events.models import Event
+from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
 def events(request):
     # events = Event.objects.all()
     events = Event.objects.filter(date__gte=timezone.now())
@@ -64,3 +64,9 @@ def cancel_events(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     event.delete()
     return redirect("events")
+
+@login_required
+def my_events(request):
+    events = Event.objects.filter(user=request.user)
+    username = request.user.username
+    return render(request, 'events/my_events.html', {'events': events, 'username': username})
