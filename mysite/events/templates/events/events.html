@@ -88,7 +88,7 @@
             <h1 class="fs-3 fw-bold">Upcoming Events You Created</h1>
           </div>
           <div class="col">
-            <a href="{% url 'add_event' %}">
+            <a href="{% url 'add_events' %}">
               <button type="button" class="btn btn-primary py-2 px-4">
                 Add Event
               </button>
@@ -108,7 +108,7 @@
           </div>
           <div>
             <a
-              href="{% url 'view_event' event.id %}"
+              href="{% url 'view_events' event.id %}"
               class="btn btn-outline-primary py-2 px-5 marginbtn"
               >View</a
             >
