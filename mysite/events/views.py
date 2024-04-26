@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 from events.models import Event
-
+from .forms import EventForm
 
 # Create your views here.
 def events(request):
@@ -51,3 +51,14 @@ def cancel_event(request, event_id):
     eve=get_object_or_404(Event, pk=event_id)
     eve.delete()
     return redirect('/events/')
+
+def edit_event(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+    if request.method == 'POST':
+        form = EventForm(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+            return redirect('/events/')
+    else:
+        form = EventForm(instance=event)
+    return render(request, 'events/edit_event.html', {'form': form})
