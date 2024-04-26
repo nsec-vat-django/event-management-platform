@@ -6,8 +6,13 @@
 <p>{{ event.description }}</p>
 <p><strong>Date:</strong> {{ event.date }}</p>
 <p><strong>Location:</strong> {{ event.location }}</p>
+<p><strong>Seats:</strong> {{ event.num_participants }}/{{ event.max_participants }}</p>
 <a class="btn btn-primary" href="{% url 'events' %}">Back to Event List</a>
-{% if event.date >= now %}
+{% if user.is_authenticated and event.user == user %}
+<a href="{% url 'cancel_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">Cancel</a>
+<a href="{% url 'edit_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">Edit</a>
+{% endif %}
+{% if event.date >= now and event.num_participants < event.max_participants %}
 <a class="btn btn-primary" href="{% url 'register_events' event.id %}">Register</a>
 {% endif %}
 

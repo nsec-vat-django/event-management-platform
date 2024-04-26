@@ -28,6 +28,7 @@
         <h2 class="fs-4">{{ event.title }}</h2>
         <p>{{ event.date }}</p>
         <p>{{ event.location }}</p>
+        <p>Seats: {{ event.num_participants }}/{{ event.max_participants }}</p>
       </div>
       <div>
         <a href="{% url 'view_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">View</a>

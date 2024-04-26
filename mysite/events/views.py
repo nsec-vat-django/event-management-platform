@@ -20,7 +20,9 @@ def past_events(request):
 
 def view_events(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
-    return render(request, "events/view_events.html", {"event": event, "now": timezone.now()})
+    return render(
+        request, "events/view_events.html", {"event": event, "now": timezone.now()}
+    )
 
 
 def register_events(request, event_id):
@@ -29,10 +31,14 @@ def register_events(request, event_id):
         name = request.POST.get("name")
         email = request.POST.get("email")
         participant, created = Participant.objects.get_or_create(name=name, email=email)
-        if event.participants.filter(id=participant.id).exists():
-            messages.warning(request, "You are already registered for this event!")
+        if event.participants.count() >= event.max_participants:
+            messages.warning(request, "This Event is Full!")
+        elif event.participants.filter(id=participant.id).exists():
+            messages.warning(request, "You Are Already Registered For This Event!")
         else:
             event.participants.add(participant)
+            event.num_participants += 1
+            event.save()
             messages.success(request, "Registration Successful!")
         return redirect("events")
     return render(request, "events/register_events.html", {"event": event})
@@ -40,21 +46,13 @@ def register_events(request, event_id):
 
 def add_events(request):
     if request.method == "POST":
-        # fetch data
-        event_title = request.POST.get("title")
-        event_description = request.POST.get("description")
-        event_date = request.POST.get("date") + " " + request.POST.get("time")
-        event_location = request.POST.get("location")
-
-        # create model object and set the data
         event = Event()
-        event.title = event_title
-        event.description = event_description
-        event.date = event_date
-        event.location = event_location
+        event.title = request.POST.get("title")
+        event.description = request.POST.get("description")
+        event.date = request.POST.get("date") + " " + request.POST.get("time")
+        event.location = request.POST.get("location")
+        event.max_participants = request.POST.get("max_participants")
         event.user = request.user
-
-        # saving the data in database
         event.save()
         messages.success(request, "Event Creation Successful!")
         return redirect("events")
@@ -68,6 +66,7 @@ def edit_events(request, event_id):
         event.description = request.POST.get("description")
         event.date = request.POST.get("date") + " " + request.POST.get("time")
         event.location = request.POST.get("location")
+        event.max_participants = request.POST.get("max_participants")
         event.save()
         messages.success(request, "Edit Event Successful!")
         return redirect("events")
