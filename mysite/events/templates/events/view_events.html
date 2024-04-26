@@ -1,21 +1,19 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ event.title }}</title>
-  <link rel="stylesheet" href="{% static 'events/style.css' %}" />
-</head>
+    <link rel="stylesheet" href="{% static 'events/style.css' %}" />
+  </head>
 
-<body>
-  <h1>{{ event.title }}</h1>
-  <p>{{ event.description }}</p>
-  <p><strong>Date:</strong> {{ event.date }}</p>
-  <p><strong>Location:</strong> {{ event.location }}</p>
-  <a href="{% url 'events' %}">Back to Event List</a>
-  <a href="{% url 'events' %}">Register</a>
-</body>
-
+  <body>
+    <h1>{{ event.title }}</h1>
+    <p>{{ event.description }}</p>
+    <p><strong>Date:</strong> {{ event.date }}</p>
+    <p><strong>Location:</strong> {{ event.location }}</p>
+    <a href="{% url 'events' %}">Back to Event List</a>
+    <a href="{% url 'events' %}">Register</a>
+  </body>
 </html>
