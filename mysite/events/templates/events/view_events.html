@@ -7,7 +7,9 @@
 <p><strong>Date:</strong> {{ event.date }}</p>
 <p><strong>Location:</strong> {{ event.location }}</p>
 <a class="btn btn-primary" href="{% url 'events' %}">Back to Event List</a>
+{% if event.date >= now %}
 <a class="btn btn-primary" href="{% url 'register_events' event.id %}">Register</a>
+{% endif %}
 
 {% if user.is_authenticated and event.user == user %}
 <h2>Registered Participants</h2>

@@ -20,18 +20,20 @@ def past_events(request):
 
 def view_events(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
-    return render(request, "events/view_events.html", {"event": event})
+    return render(request, "events/view_events.html", {"event": event, "now": timezone.now()})
 
 
 def register_events(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     if request.method == "POST":
-        participant = Participant()
-        participant.name = request.POST.get("name")
-        participant.email = request.POST.get("email")
-        participant.save()
-        event.participants.add(participant)
-        messages.success(request, "Registration Successful!")
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        participant, created = Participant.objects.get_or_create(name=name, email=email)
+        if event.participants.filter(id=participant.id).exists():
+            messages.warning(request, "You are already registered for this event!")
+        else:
+            event.participants.add(participant)
+            messages.success(request, "Registration Successful!")
         return redirect("events")
     return render(request, "events/register_events.html", {"event": event})
 
