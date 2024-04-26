@@ -46,3 +46,8 @@ def create_event(request):
 
         return redirect("/events/")
     return render(request, "events/add_events.html", {})
+
+def cancel_event(request, event_id):
+    eve=get_object_or_404(Event, pk=event_id)
+    eve.delete()
+    return redirect('/events/')

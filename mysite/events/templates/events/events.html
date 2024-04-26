@@ -112,6 +112,11 @@
               class="btn btn-outline-primary py-2 px-5 marginbtn"
               >View</a
             >
+            <a
+              href="{% url 'cancel_events' event.id %}"
+              class="btn btn-outline-primary py-2 px-5 marginbtn"
+              >Cancel</a
+            >
           </div>
         </div>
         {% empty %}
