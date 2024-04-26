@@ -15,7 +15,7 @@
   <body>
     <div class="container py-5">
       <h1 class="mb-5">Add Event</h1>
-      <form action="/events/create_event/" method="POST">
+      <form action="{% url 'add_events' %}" method="POST">
         {% csrf_token %}
         <div class="mb-3 fw-bold">
           <label for="exampleFormControlInput1" class="form-label">Name</label>

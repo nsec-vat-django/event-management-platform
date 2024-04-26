@@ -17,37 +17,34 @@ def past_events(request):
     return render(request, "events/past_events.html", context)
 
 
-def add_events(request):
-    return render(request, "events/add_events.html")
-
-
 def view_events(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     return render(request, "events/view_events.html", {"event": event})
 
 
-def create_event(request):
+def add_events(request):
     if request.method == "POST":
         # fetch data
-        emp_name = request.POST.get("title")
-        emp_description = request.POST.get("description")
-        emp_date = request.POST.get("date")
-        emp_location = request.POST.get("location")
+        event_title = request.POST.get("title")
+        event_description = request.POST.get("description")
+        event_date = request.POST.get("date")
+        event_location = request.POST.get("location")
 
         # create model object and set the data
-        e = Event()
-        e.title = emp_name
-        e.description = emp_description
-        e.date = emp_date
-        e.location = emp_location
+        event = Event()
+        event.title = event_title
+        event.description = event_description
+        event.date = event_date
+        event.location = event_location
 
         # saving the data in database
-        e.save()
+        event.save()
 
-        return redirect("/events/")
+        return redirect("events")
     return render(request, "events/add_events.html", {})
 
+
 def cancel_event(request, event_id):
-    eve=get_object_or_404(Event, pk=event_id)
-    eve.delete()
-    return redirect('/events/')
+    event = get_object_or_404(Event, pk=event_id)
+    event.delete()
+    return redirect("events")
