@@ -8,20 +8,24 @@
     {% csrf_token %}
     <div class="mb-3 fw-bold">
       <label for="exampleFormControlInput1" class="form-label">Name</label>
-      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter event name" value="{{ event.title }}"
+      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter event name" value="{{ event.title }}" required
         name="title" />
     </div>
     <div class="mb-3 fw-bold">
       <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter event details" name="description">{{ event.description }}</textarea>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter event details" name="description" required>{{ event.description }}</textarea>
     </div>
     <div class="mb-3 fw-bold">
-      <label for="exampleFormControlInput1" class="form-label">Date & Time</label>
-      <input type="date" class="form-control" id="exampleFormControlInput1" name="date" value="{{ event.date }}"/>
+      <label for="exampleFormControlInput1" class="form-label">Date</label>
+      <input type="date" class="form-control" id="exampleFormControlInput1" name="date" value="{{ event.date|date:'Y-m-d' }}" required/>
+    </div>
+    <div class="mb-3 fw-bold">
+      <label for="exampleFormControlInput1" class="form-label">Time</label>
+      <input type="time" class="form-control" id="exampleFormControlInput1" name="time" value="{{ event.date|time:'H:i' }}" required/>
     </div>
     <div class="mb-3 fw-bold">
       <label for="exampleFormControlTextarea1" class="form-label">Location</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Enter event location" name="location">{{ event.location }}</textarea>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Enter event location" name="location" required>{{ event.location }}</textarea>
     </div>
     <button class="btn btn-primary">Edit Event</button>
   </form>

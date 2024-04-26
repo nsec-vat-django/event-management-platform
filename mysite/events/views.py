@@ -1,5 +1,6 @@
-from django.shortcuts import HttpResponse, get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
+from datetime import datetime
 from events.models import Event
 
 
@@ -27,7 +28,7 @@ def add_events(request):
         # fetch data
         event_title = request.POST.get("title")
         event_description = request.POST.get("description")
-        event_date = request.POST.get("date")
+        event_date = request.POST.get("date") + ' ' + request.POST.get("time")
         event_location = request.POST.get("location")
 
         # create model object and set the data
@@ -49,7 +50,8 @@ def edit_events(request, event_id):
     if request.method == "POST":
         event.title = request.POST.get("title")
         event.description = request.POST.get("description")
-        event.date = request.POST.get("date")
+        event.date = request.POST.get("date") + ' ' + request.POST.get("time")
+        # event.date = request.POST.get("date")
         event.location = request.POST.get("location")
         event.save()
         return redirect("events")
