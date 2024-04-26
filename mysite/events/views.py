@@ -28,7 +28,7 @@ def add_events(request):
         # fetch data
         event_title = request.POST.get("title")
         event_description = request.POST.get("description")
-        event_date = request.POST.get("date") + ' ' + request.POST.get("time")
+        event_date = request.POST.get("date") + " " + request.POST.get("time")
         event_location = request.POST.get("location")
 
         # create model object and set the data
@@ -37,6 +37,7 @@ def add_events(request):
         event.description = event_description
         event.date = event_date
         event.location = event_location
+        event.user = request.user
 
         # saving the data in database
         event.save()
@@ -50,8 +51,7 @@ def edit_events(request, event_id):
     if request.method == "POST":
         event.title = request.POST.get("title")
         event.description = request.POST.get("description")
-        event.date = request.POST.get("date") + ' ' + request.POST.get("time")
-        # event.date = request.POST.get("date")
+        event.date = request.POST.get("date") + " " + request.POST.get("time")
         event.location = request.POST.get("location")
         event.save()
         return redirect("events")
@@ -65,8 +65,11 @@ def cancel_events(request, event_id):
     event.delete()
     return redirect("events")
 
+
 @login_required
 def my_events(request):
     events = Event.objects.filter(user=request.user)
     username = request.user.username
-    return render(request, 'events/my_events.html', {'events': events, 'username': username})
+    return render(
+        request, "events/my_events.html", {"events": events, "username": username}
+    )
