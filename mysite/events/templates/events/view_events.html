@@ -7,7 +7,7 @@
   <p>{{ event.description }}</p>
   <p><strong>Date:</strong> {{ event.date }}</p>
   <p><strong>Location:</strong> {{ event.location }}</p>
-  <a href="{% url 'events' %}">Back to Event List</a>
-  <a href="{% url 'events' %}">Register</a>
+  <a class="btn btn-primary" href="{% url 'events' %}">Back to Event List</a>
+  <a class="btn btn-primary" href="{% url 'register_events' event.id %}">Register</a>
 </body>
 {% endblock %}

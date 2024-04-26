@@ -8,6 +8,7 @@
 4. [Django Authentication Docs](https://docs.djangoproject.com/en/5.0/topics/auth/default/)
 5. [Django VSCode Basics](https://code.visualstudio.com/docs/python/tutorial-django)
 6. [Django Tutorial](https://docs.djangoproject.com/en/5.0/intro/tutorial01/)
+7. [Django Messages](https://docs.djangoproject.com/en/5.0/ref/contrib/messages/)
 
 ## Django admin-panel credentials
 

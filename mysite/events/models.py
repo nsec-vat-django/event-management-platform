@@ -12,3 +12,12 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Participant(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    events = models.ManyToManyField(Event, related_name="participants")
+
+    def __str__(self):
+        return self.name

@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
-from datetime import datetime
-from events.models import Event
+from django.contrib import messages
+from events.models import Event, Participant
 from django.contrib.auth.decorators import login_required
 
 
@@ -23,6 +23,19 @@ def view_events(request, event_id):
     return render(request, "events/view_events.html", {"event": event})
 
 
+def register_events(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+    if request.method == "POST":
+        participant = Participant()
+        participant.name = request.POST.get("name")
+        participant.email = request.POST.get("email")
+        participant.save()
+        event.participants.add(participant)
+        messages.success(request, "Registration Successful!")
+        return redirect("events")
+    return render(request, "events/register_events.html", {"event": event})
+
+
 def add_events(request):
     if request.method == "POST":
         # fetch data
@@ -41,7 +54,7 @@ def add_events(request):
 
         # saving the data in database
         event.save()
-
+        messages.success(request, "Event Creation Successful!")
         return redirect("events")
     return render(request, "events/add_events.html", {})
 
@@ -54,6 +67,7 @@ def edit_events(request, event_id):
         event.date = request.POST.get("date") + " " + request.POST.get("time")
         event.location = request.POST.get("location")
         event.save()
+        messages.success(request, "Edit Event Successful!")
         return redirect("events")
     else:
         context = {"event": event}
@@ -63,6 +77,7 @@ def edit_events(request, event_id):
 def cancel_events(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     event.delete()
+    messages.success(request, "Event Deletion Successful!")
     return redirect("events")
 
 
