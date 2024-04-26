@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import HttpResponse, get_object_or_404, render, redirect
 from django.utils import timezone
 from events.models import Event
 
@@ -44,7 +44,21 @@ def add_events(request):
     return render(request, "events/add_events.html", {})
 
 
-def cancel_event(request, event_id):
+def edit_events(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+    if request.method == "POST":
+        event.title = request.POST.get("title")
+        event.description = request.POST.get("description")
+        event.date = request.POST.get("date")
+        event.location = request.POST.get("location")
+        event.save()
+        return redirect("events")
+    else:
+        context = {"event": event}
+    return render(request, "events/edit_events.html", context)
+
+
+def cancel_events(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     event.delete()
     return redirect("events")
