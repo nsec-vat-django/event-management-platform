@@ -1,0 +1,29 @@
+{% extends "events/layout.html" %}
+{% block title %}Edit Event{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+  <h1 class="mb-5">Edit Event</h1>
+  <form action="{% url 'edit_events' event.id %}" method="POST">
+    {% csrf_token %}
+    <div class="mb-3 fw-bold">
+      <label for="exampleFormControlInput1" class="form-label">Name</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter event name" value="{{ event.title }}"
+        name="title" />
+    </div>
+    <div class="mb-3 fw-bold">
+      <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter event details" name="description">{{ event.description }}</textarea>
+    </div>
+    <div class="mb-3 fw-bold">
+      <label for="exampleFormControlInput1" class="form-label">Date & Time</label>
+      <input type="date" class="form-control" id="exampleFormControlInput1" name="date" value="{{ event.date }}"/>
+    </div>
+    <div class="mb-3 fw-bold">
+      <label for="exampleFormControlTextarea1" class="form-label">Location</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Enter event location" name="location">{{ event.location }}</textarea>
+    </div>
+    <button class="btn btn-primary">Edit Event</button>
+  </form>
+</div>
+{% endblock %}
