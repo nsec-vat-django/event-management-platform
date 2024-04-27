@@ -5,14 +5,13 @@
 <!-- events  -->
 <section class="px-lg-5 py-5 text-center">
   <div class="container mb-5">
-    <div class="d-flex justify-content-center align-items-center">
-      <div class="col">
-        <h1 class="fs-3 fw-bold">Upcoming Events</h1>
-      </div>
+    <div class="text-center">
+      <h1 class="fs-3 fw-bold">Upcoming Events</h1>
+    </div>
       <div class="col">
         {% if user.is_authenticated %}
         <a href="{% url 'add_events' %}">
-          <button type="button" class="btn btn-primary py-2 px-4">
+          <button type="button" class="btn btn-primary py-2 px-4 mt-3">
             Add Event
           </button>
         </a>
@@ -20,21 +19,22 @@
         {% endif %}
       </div>
     </div>
-  </div>
-  {% for event in events %}
-  <div class="container">
-    <div class="d-flex justify-content-evenly align-items-center event-gap lh-1 mb-4">
-      <div class="text-start">
-        <h2 class="fs-4">{{ event.title }}</h2>
-        <p>{{ event.date }}</p>
-        <p>{{ event.location }}</p>
-      </div>
-      <div>
-        <a href="{% url 'view_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">View</a>
-        {% if user.is_authenticated and event.user == user %}
-        <a href="{% url 'cancel_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">Cancel</a>
-        <a href="{% url 'edit_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">Edit</a>
-        {% endif %}
+  
+    {% for event in events %}
+    <div class="container my-4">
+      <div class="row align-items-center">
+        <div class="col-md-8 text-md-start">
+          <h2 class="fs-4 mb-2">{{ event.title }}</h2>
+          <p class="mb-1"><strong>Date:</strong> {{ event.date }}</p>
+          <p><strong>Location:</strong> {{ event.location }}</p>
+        </div>
+        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+          <a href="{% url 'view_events' event.id %}" class="btn btn-outline-primary py-2 px-4 me-2">View</a>
+          {% if user.is_authenticated and event.user == user %}
+          <a href="{% url 'cancel_events' event.id %}" class="btn btn-outline-primary py-2 px-4 me-2">Cancel</a>
+          <a href="{% url 'edit_events' event.id %}" class="btn btn-outline-primary py-2 px-4">Edit</a>
+          {% endif %}
+        </div>
       </div>
     </div>
     {% empty %}

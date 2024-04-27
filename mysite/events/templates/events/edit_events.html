@@ -2,7 +2,7 @@
 {% block title %}Edit Event{% endblock %}
 {% block content %}
 
-<div class="container py-5">
+<div class="container py-5 mb-5 px-4">
   <h1 class="mb-5">Edit Event</h1>
   <form action="{% url 'edit_events' event.id %}" method="POST">
     {% csrf_token %}

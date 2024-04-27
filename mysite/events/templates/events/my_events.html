@@ -2,8 +2,9 @@
 {% block title %}{{ event.title }}{% endblock %}
 {% block content %}
 
-<h1>Welcome, {{ username }}! </h1>
-<h3>Here are your events:</h3>
+<div class="container p-5 text-md-start">
+  <h1 class="mb-3">Welcome, <span class="text-success">{{ username }}</span>😁 </h1>
+<h3 class="mb-5">Here are your events:</h3>
 
 {% if events %}
   <ul>
@@ -19,4 +20,5 @@
 {% else %}
   <p>No events created.</p>
 {% endif %}
+</div>
 {% endblock %}
