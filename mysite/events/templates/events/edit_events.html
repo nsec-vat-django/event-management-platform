@@ -16,6 +16,10 @@
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter event details" name="description" required>{{ event.description }}</textarea>
     </div>
     <div class="mb-3 fw-bold">
+      <label for="maxParticipants" class="form-label">Max Participants</label>
+      <input type="number" class="form-control" id="maxParticipants" name="max_participants" min="1" placeholder="Enter maximum number of participants" required value="{{ event.max_participants }}"/>
+    </div>
+    <div class="mb-3 fw-bold">
       <label for="exampleFormControlInput1" class="form-label">Date</label>
       <input type="date" class="form-control" id="exampleFormControlInput1" name="date" value="{{ event.date|date:'Y-m-d' }}" required/>
     </div>

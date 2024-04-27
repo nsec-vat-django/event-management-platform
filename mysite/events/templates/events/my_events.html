@@ -7,18 +7,21 @@
 <h3 class="mb-5">Here are your events:</h3>
 
 {% if events %}
-  <ul>
-    {% for event in events %}
-    <li>
-        <h3>{{ event.title }}</h3>
-        <p>{{ event.description }}</p>
-        <p>{{ event.date }}</p>
-        <p>{{ event.location }}</p>
-      </li>
-    {% endfor %}
-  </ul>
+<ul>
+  {% for event in events %}
+  <li>
+    <h3>{{ event.title }}</h3>
+    <p>{{ event.description }}</p>
+    <p>{{ event.date }}</p>
+    <p>{{ event.location }}</p>
+  </li>
+  <a href="{% url 'view_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">View</a>
+  <a href="{% url 'cancel_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">Cancel</a>
+  <a href="{% url 'edit_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">Edit</a>
+  {% endfor %}
+</ul>
 {% else %}
-  <p>No events created.</p>
+<p>No events created.</p>
 {% endif %}
 </div>
 {% endblock %}

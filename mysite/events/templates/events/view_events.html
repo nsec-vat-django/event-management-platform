@@ -2,14 +2,45 @@
 {% block title %}{{ event.title }}{% endblock %}
 {% block content %}
 
-<body>
-  <div class="container px-5" style="margin: 20vh auto; text-align: center;">
-    <h1>{{ event.title }}</h1>
+<div class="container px-5" style="margin: 20vh auto; text-align: center;">
+  <h1>{{ event.title }}</h1>
   <p>{{ event.description }}</p>
   <p><strong>Date:</strong> {{ event.date }}</p>
   <p><strong>Location:</strong> {{ event.location }}</p>
+  <p><strong>Seats:</strong> {{ event.num_participants }}/{{ event.max_participants }}</p>
   <a href="{% url 'events' %}" class="btn btn-warning border border-3 border-dark me-3">Back to Event List</a>
+  {% if user.is_authenticated and event.user == user %}
+  <a href="{% url 'cancel_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">Cancel</a>
+  <a href="{% url 'edit_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">Edit</a>
+  {% endif %}
+  {% if event.date >= now and event.num_participants < event.max_participants %}
   <a href="{% url 'events' %}" class="btn btn-secondary border border-dark border-3">Register</a>
-  </div>
-</body>
+  {% endif %}
+</div>
+
+<div>
+  {% if user.is_authenticated and event.user == user %}
+  <h2>Registered Participants</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for participant in event.participants.all %}
+        <tr>
+          <td>{{ participant.name }}</td>
+          <td>{{ participant.email }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="2">No participants have registered for this event yet.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
 {% endblock %}

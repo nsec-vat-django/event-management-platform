@@ -39,17 +39,17 @@
           {% endif %}
           <li class="nav-item">
             {% if request.resolver_match.url_name == 'past_events' %}
-              <a class="nav-link" href="{% url 'events' %}">Upcoming Events</a>
+            <a class="nav-link" href="{% url 'events' %}">Upcoming Events</a>
             {% else %}
-              <a class="nav-link" href="{% url 'past_events' %}">Past Events</a>
+            <a class="nav-link" href="{% url 'past_events' %}">Past Events</a>
             {% endif %}
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item">
             {% if request.resolver_match.url_name == 'my_events' %}
-              <a class="nav-link" href="{% url 'events' %}">Upcoming Events</a>
+            <a class="nav-link" href="{% url 'events' %}">Upcoming Events</a>
             {% else %}
-              <a class="nav-link" href="{% url 'my_events' %}">My Events</a>
+            <a class="nav-link" href="{% url 'my_events' %}">My Events</a>
             {% endif %}
           </li>
           {% endif %}
@@ -58,6 +58,14 @@
     </div>
   </nav>
 
+  <!-- messages -->
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
   {% block content %} {% endblock %}
 
   <!-- footer  -->
