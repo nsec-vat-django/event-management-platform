@@ -14,7 +14,7 @@
   <a href="{% url 'edit_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">Edit</a>
   {% endif %}
   {% if event.date >= now and event.num_participants < event.max_participants %}
-  <a href="{% url 'events' %}" class="btn btn-secondary border border-dark border-3">Register</a>
+  <a href="{% url 'register_events' event.id %}" class="btn btn-secondary border border-dark border-3">Register</a>
   {% endif %}
 </div>
 

@@ -33,7 +33,7 @@
           <a href="{% url 'view_events' event.id %}" class="btn btn-outline-primary py-2 px-4 me-2">View</a>
           {% if user.is_authenticated and event.user == user %}
           <a href="{% url 'cancel_events' event.id %}" class="btn btn-outline-primary py-2 px-4 me-2">Cancel</a>
-          <a href="{% url 'edit`_events' event.id %}" class="btn btn-outline-primary py-2 px-4">Edit</a>
+          <a href="{% url 'edit_events' event.id %}" class="btn btn-outline-primary py-2 px-4">Edit</a>
           {% endif %}
         </div>
       </div>
