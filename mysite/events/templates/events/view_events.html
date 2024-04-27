@@ -2,30 +2,30 @@
 {% block title %}{{ event.title }}{% endblock %}
 {% block content %}
 
-<div class="container px-5" style="margin: 20vh auto; text-align: center;">
+<div class="container px-5 border border-dark border-2 bg-light p-2 pb-4" style="margin: 20vh auto; text-align: center;">
   <h1>{{ event.title }}</h1>
   <p>{{ event.description }}</p>
   <p><strong>Date:</strong> {{ event.date }}</p>
   <p><strong>Location:</strong> {{ event.location }}</p>
   <p><strong>Seats:</strong> {{ event.num_participants }}/{{ event.max_participants }}</p>
-  <a href="{% url 'events' %}" class="btn btn-warning border border-3 border-dark me-3">Back to Event List</a>
+  <a href="{% url 'events' %}" class="btn btn-warning border border-3 border-dark me-3 mt-3">Back to Event List</a>
   {% if user.is_authenticated and event.user == user %}
-  <a href="{% url 'cancel_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">Cancel</a>
-  <a href="{% url 'edit_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">Edit</a>
+  <a href="{% url 'edit_events' event.id %}" class="btn btn-outline-primary me-3 px-4 marginbtn mt-3">Edit</a>
+  <a href="{% url 'cancel_events' event.id %}" class="btn btn-outline-primary me-3 marginbtn mt-3">Cancel</a>
   {% endif %}
   {% if event.date >= now and event.num_participants < event.max_participants %}
-  <a href="{% url 'register_events' event.id %}" class="btn btn-secondary border border-dark border-3">Register</a>
+  <a href="{% url 'register_events' event.id %}" class="btn btn-secondary border border-dark border-3 px-5 mt-3">Register</a>
   {% endif %}
 </div>
 
-<div>
+<div class="container my-5">
   {% if user.is_authenticated and event.user == user %}
-  <h2>Registered Participants</h2>
-  <table>
+  <h2 class="text-center mb-4">Registered Participants <i class="bi bi-people-fill"></i></h2>
+  <table class="table table-striped text-center" style="margin-bottom: 10vh;">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Email</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
       </tr>
     </thead>
     <tbody>

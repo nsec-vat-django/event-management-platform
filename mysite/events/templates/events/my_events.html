@@ -3,21 +3,23 @@
 {% block content %}
 
 <div class="container p-5 text-md-start">
-  <h1 class="mb-3">Welcome, <span class="text-success">{{ username }}</span>😁 </h1>
+  <h1 class="mb-3">Welcome, <span class="text-success">{{ username }}</span> <i class="bi bi-person-circle"></i> </h1>
 <h3 class="mb-5">Here are your events:</h3>
 
 {% if events %}
 <ul>
   {% for event in events %}
-  <li>
-    <h3>{{ event.title }}</h3>
-    <p>{{ event.description }}</p>
-    <p>{{ event.date }}</p>
-    <p>{{ event.location }}</p>
+  <li class="list-group bg-light p-3 border border-2 border-dark  mb-3">
+    <h3 class="text-primary">{{ event.title }}</h3>
+    <p class="fs-5 my-1">{{ event.description }}</p>
+    <p class="fw-bold my-2">{{ event.date }}</p>
+    <p class="fw-medium">{{ event.location }}</p>
   </li>
-  <a href="{% url 'view_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">View</a>
-  <a href="{% url 'cancel_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">Cancel</a>
-  <a href="{% url 'edit_events' event.id %}" class="btn btn-outline-primary py-2 px-5 marginbtn">Edit</a>
+  <div class="mb-5 text-center text-md-start">
+    <a href="{% url 'view_events' event.id %}" class="btn btn-outline-primary py-2 px-4 me-3 mt-2 marginbtn">View</a>
+  <a href="{% url 'cancel_events' event.id %}" class="btn btn-outline-primary py-2 px-4 me-3 mt-2 marginbtn">Cancel</a>
+  <a href="{% url 'edit_events' event.id %}" class="btn btn-outline-primary py-2 px-4 me-3 mt-2 marginbtn">Edit</a>
+  </div>
   {% endfor %}
 </ul>
 {% else %}

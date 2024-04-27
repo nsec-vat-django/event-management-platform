@@ -61,9 +61,9 @@
 
   <!-- messages -->
   {% if messages %}
-  <ul class="messages">
+  <ul class="messages bg-warning">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    <li{% if message.tags %} class="{{ message.tags }} list-group fs-5 text-center p-2" {% endif %}>{{ message }}</li>
       {% endfor %}
   </ul>
   {% endif %}

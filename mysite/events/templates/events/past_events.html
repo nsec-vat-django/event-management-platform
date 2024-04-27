@@ -12,14 +12,14 @@
     </div>
   </div>
   {% for event in events %}
-<div class="container my-4">
+<div class="container my-4 bg-light p-3 border border-dark border-2">
   <div class="row align-items-center">
     <div class="col-md-8 text-md-start">
       <h2 class="fs-4 mb-2">{{ event.title }}</h2>
       <p class="mb-1"><strong>Date:</strong> {{ event.date }}</p>
       <p><strong>Location:</strong> {{ event.location }}</p>
     </div>
-    <div class="col-md-4 text-md-end mt-3 mt-md-0">
+    <div class="col-md-4 text-md-end mt-2 mt-md-0">
       <a href="{% url 'view_events' event.id %}" class="btn btn-outline-primary py-2 px-4">View</a>
     </div>
   </div>

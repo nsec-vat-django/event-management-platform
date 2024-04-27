@@ -21,15 +21,15 @@
     </div>
   
     {% for event in events %}
-    <div class="container my-4">
+    <div class="container my-4 border border-dark border-2 bg-light p-3">
       <div class="row align-items-center">
-        <div class="col-md-8 text-md-start">
+        <div class="col-lg-8 text-lg-start">
           <h2 class="fs-4 mb-2">{{ event.title }}</h2>
           <p class="mb-1"><strong>Date:</strong> {{ event.date }}</p>
-          <p><strong>Location:</strong> {{ event.location }}</p>
-          <p>Seats: {{ event.num_participants }}/{{ event.max_participants }}</p>
+          <p class="mb-1"><strong>Location:</strong> {{ event.location }}</p> 
+          <p><strong>Seats:</strong> {{ event.num_participants }}/{{ event.max_participants }}</p>
         </div>
-        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+        <div class="col-lg-4 text-lg-end mt-3 mt-md-0">
           <a href="{% url 'view_events' event.id %}" class="btn btn-outline-primary py-2 px-4 me-2">View</a>
           {% if user.is_authenticated and event.user == user %}
           <a href="{% url 'cancel_events' event.id %}" class="btn btn-outline-primary py-2 px-4 me-2">Cancel</a>
