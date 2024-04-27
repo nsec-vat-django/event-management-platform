@@ -12,13 +12,14 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
   <!-- navbar  -->
   <nav class="navbar navbar-expand-lg bg-primary px-md-5" data-bs-theme="dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'events' %}">📅 EventBud</a>
+      <a class="navbar-brand" href="{% url 'events' %}"><i class="bi bi-calendar2-event-fill me-2"></i> EventEase</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,29 +28,29 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            <a class="nav-link" href="{% url 'logout' %}"><i class="bi bi-box-arrow-left me-2"></i>Logout</a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">Login</a>
+            <a class="nav-link" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right me-2"></i>Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'register' %}">Signup</a>
+            <a class="nav-link" href="{% url 'register' %}"><i class="bi bi-person-add me-2"></i>Signup</a>
           </li>
           {% endif %}
           <li class="nav-item">
             {% if request.resolver_match.url_name == 'past_events' %}
-            <a class="nav-link" href="{% url 'events' %}">Upcoming Events</a>
+            <a class="nav-link" href="{% url 'events' %}"><i class="bi bi-calendar-day me-2"></i>Upcoming Events</a>
             {% else %}
-            <a class="nav-link" href="{% url 'past_events' %}">Past Events</a>
+            <a class="nav-link" href="{% url 'past_events' %}"><i class="bi bi-calendar-date me-2"></i>Past Events</a>
             {% endif %}
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item">
             {% if request.resolver_match.url_name == 'my_events' %}
-            <a class="nav-link" href="{% url 'events' %}">Upcoming Events</a>
+            <a class="nav-link" href="{% url 'events' %}"><i class="bi bi-calendar-day me-2"></i>Upcoming Events</a>
             {% else %}
-            <a class="nav-link" href="{% url 'my_events' %}">My Events</a>
+            <a class="nav-link" href="{% url 'my_events' %}"><i class="bi bi-calendar-heart me-2"></i>My Events</a>
             {% endif %}
           </li>
           {% endif %}
